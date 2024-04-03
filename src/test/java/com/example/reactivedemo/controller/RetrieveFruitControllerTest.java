@@ -11,43 +11,43 @@ import com.example.reactivedemo.domain.fruit.Fruit;
 
 import reactor.core.publisher.Flux;
 
-public class RetrieveFruitControllerTest {
+class RetrieveFruitControllerTest {
 
-    @Test
-    public void testRetrieveFruit() {
-        // Mock del servicio RetrieveFruit
-        RetrieveFruit retrieveFruitMock = mock(RetrieveFruit.class);
+        @Test
+        void testRetrieveFruit() {
+                // Mock del servicio RetrieveFruit
+                RetrieveFruit retrieveFruitMock = mock(RetrieveFruit.class);
 
-        // Instanciar el controlador con el mock
-        RetrieveFruitController controller = new RetrieveFruitController(retrieveFruitMock);
+                // Instanciar el controlador con el mock
+                RetrieveFruitController controller = new RetrieveFruitController(retrieveFruitMock);
 
-        // Configurar datos de prueba
-        Fruit expectedFruit1 = Fruit.builder()
-                .name("Banana")
-                .build();
-        ;
-        Fruit expectedFruit2 = Fruit.builder()
-                .name("Pera")
-                .build();
-        ;
+                // Configurar datos de prueba
+                Fruit expectedFruit1 = Fruit.builder()
+                                .name("Banana")
+                                .build();
+                ;
+                Fruit expectedFruit2 = Fruit.builder()
+                                .name("Pera")
+                                .build();
+                ;
 
-        // Simular comportamiento del servicio
-        when(retrieveFruitMock.get()).thenReturn(Flux.just(expectedFruit1, expectedFruit2));
+                // Simular comportamiento del servicio
+                when(retrieveFruitMock.get()).thenReturn(Flux.just(expectedFruit1, expectedFruit2));
 
-        // Configurar el cliente web para realizar la solicitud HTTP al controlador
-        WebTestClient webTestClient = WebTestClient.bindToController(controller).build();
+                // Configurar el cliente web para realizar la solicitud HTTP al controlador
+                WebTestClient webTestClient = WebTestClient.bindToController(controller).build();
 
-        // Realizar la solicitud GET
-        webTestClient.get()
-                .uri("/fruit")
-                .exchange()
-                .expectStatus().isOk()
-                .expectHeader().contentType(MediaType.APPLICATION_JSON)
-                .expectBodyList(Fruit.class)
-                .hasSize(2)
-                .contains(expectedFruit1, expectedFruit2);
+                // Realizar la solicitud GET
+                webTestClient.get()
+                                .uri("/fruit")
+                                .exchange()
+                                .expectStatus().isOk()
+                                .expectHeader().contentType(MediaType.APPLICATION_JSON)
+                                .expectBodyList(Fruit.class)
+                                .hasSize(2)
+                                .contains(expectedFruit1, expectedFruit2);
 
-        // Verificar que el método del servicio se llamó
-        verify(retrieveFruitMock, times(1)).get();
-    }
+                // Verificar que el método del servicio se llamó
+                verify(retrieveFruitMock, times(1)).get();
+        }
 }

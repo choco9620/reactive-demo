@@ -15,10 +15,10 @@ import com.example.reactivedemo.repository.domain.FruitEntity;
 
 import reactor.core.publisher.Flux;
 
-public class DefaultRetrieveFruitTest {
+class DefaultRetrieveFruitTest {
 
     @Test
-    public void testGet() {
+    void testGet() {
         FruitRepository fruitRepositoryMock = mock(FruitRepository.class);
 
         FruitEntity fruitEntity1 = FruitEntity.builder()

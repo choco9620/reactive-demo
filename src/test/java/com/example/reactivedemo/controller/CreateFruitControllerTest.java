@@ -12,10 +12,10 @@ import com.example.reactivedemo.domain.fruit.Fruit;
 
 import reactor.core.publisher.Mono;
 
-public class CreateFruitControllerTest {
+class CreateFruitControllerTest {
 
     @Test
-    public void testCreateFruit() {
+    void testCreateFruit() {
         CreateFruit createFruitMock = mock(CreateFruit.class);
 
         CreateFruitController controller = new CreateFruitController(createFruitMock);
