@@ -20,18 +20,7 @@ public class DefaultRetrieveFruit implements RetrieveFruit {
 
     @Override
     public Flux<Fruit> get() {
-
-        System.out.println("Conflicto1");
         List<FruitEntity> fruitList = fruitRepository.findAll();
-        System.out.println("Conflicto2");
-        System.out.println("hola mundo");
-        System.out.println(String.format("esto es una prueba de conflicto tamanio %s", fruitList.size()));
-
-        String cadena = """
-                hola mundo
-                            vdsaa
-                    dfghb
-                """;
         return Flux.fromIterable(fruitList.stream().map(f -> Fruit.builder()
                 .id(f.getId())
                 .name(f.getName())
