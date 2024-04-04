@@ -12,20 +12,19 @@ import com.example.reactivedemo.repository.domain.FruitEntity;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
 
-/**
- * esto es un commnet
- */
 @Service
 @RequiredArgsConstructor
 public class DefaultRetrieveFruit implements RetrieveFruit {
 
-    // holi
     private final FruitRepository fruitRepository;
 
     @Override
     public Flux<Fruit> get() {
-        System.out.println("hola mundo");
+
+        System.out.println("Conflicto1");
         List<FruitEntity> fruitList = fruitRepository.findAll();
+        System.out.println("Conflicto2");
+        System.out.println("hola mundo");
         System.out.println(String.format("esto es una prueba de conflicto tamanio %s", fruitList.size()));
 
         String cadena = """
